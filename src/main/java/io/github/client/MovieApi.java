@@ -9,12 +9,10 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
 
 public class MovieApi {
-    public static void connectApi(String link) throws IOException, InterruptedException {
+    public static Movie connectApi(String link) throws IOException, InterruptedException {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -28,6 +26,7 @@ public class MovieApi {
         MovieDTO dto = gson.fromJson(json, MovieDTO.class);
         Movie movie = new Movie(dto);
 
+        return movie;
 
     }
 

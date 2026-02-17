@@ -1,5 +1,6 @@
 package io.github.model;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.dto.MovieDTO;
 
 public class Movie {
@@ -11,11 +12,20 @@ public class Movie {
     private String genre;
 
     public Movie(MovieDTO dto) {
+
         this.title = dto.title();
-        this.year = dto.year();
-        this.rated = dto.rated();
+        this.year = Integer.parseInt(dto.year());
+        try {
+            this.rated = Double.parseDouble(dto.rated());
+        } catch (Exception e) {
+            this.rated = 0.0;
+        }
         this.awards = dto.awards();
-        this.imdbRating = dto.imdbRating();
+        try {
+            this.imdbRating = Double.parseDouble(dto.imdbRating());
+        } catch (Exception e) {
+            this.imdbRating = 0.0;
+        }
         this.genre = dto.genre();
     }
 
@@ -45,5 +55,10 @@ public class Movie {
 
     public String getGenre() {
         return genre;
+    }
+
+    @Override
+    public String toString() {
+        return this.getTitle() + " / " + this.getYear() ;
     }
 }
