@@ -11,23 +11,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieService {
-    List<Movie> favorites = new ArrayList<>();
+    public List<Movie> favorites = new ArrayList<>();
     public List<Movie> movies = new ArrayList<>();
 
 
-    public void chooseMovie(String title) throws IOException, InterruptedException {
-        String encondedLink = URLEncoder.encode(title, StandardCharsets.UTF_8);
-        String link = "http://www.omdbapi.com/?apikey=7a43f72&t=" + encondedLink;
-        Movie movie = MovieApi.connectApi(link);
+    public void chooseMovie(Movie movie) throws IOException, InterruptedException {
         movies.add(movie);
     }
 
     public void saveFavorite(String title) throws IOException, InterruptedException {
-        String encondedLinkFav = URLEncoder.encode(title, StandardCharsets.UTF_8);
-        String link = "http://www.omdbapi.com/?apikey=7a43f72&t=" + encondedLinkFav;
-        Movie movie = MovieApi.connectApi(link);
+
+        Movie movie = MovieApi.connectApi(title);
 
         List<String> titles = movies.stream().map(m -> m.getTitle()).collect(Collectors.toList());
+
+        if(favorites.contains(movie)){
+            System.out.println("This movie has already been inserted");
+        } else {
+            favorites.add(movie);
+        }
 
         if(titles.contains(movie.getTitle())){
             favorites.add(movie);
@@ -40,19 +42,27 @@ public class MovieService {
         favorites.forEach(System.out::println);
     }
 
-    public void filterGenre(String genre) throws IOException, InterruptedException {
-        System.out.printf("All movies - Genre %s%n", genre);
+    public List<String> getGenre(){
 
-        List<String> genreMovie = movies.stream()
-                .map(m -> m.getGenre())
+        return movies.stream()
+                .map(m -> m.getGenre().toLowerCase().split(",")[0])
                 .collect(Collectors.toList());
+    }
 
-        if(genreMovie.contains(genre)){
-            movies.forEach(System.out::println);
-        }
+
+    public void filterGenre(String genre) throws IOException, InterruptedException {
+        genre = genre.toLowerCase();
+        var genreMovie = this.getGenre();
+        System.out.println("---------- GENRE " + genre.toUpperCase() + " -----------");
+        String finalGenre = genre;
+        movies.stream().filter(m -> m.getGenre().split(",")[0].trim().equalsIgnoreCase(finalGenre)).forEach(System.out::println);
+
+        System.out.println("--------------------------");
     }
 
     public void showAllMovies(){
-        movies.forEach(m -> System.out.println("Movie: " + m.getTitle()));
+        System.out.println("---------- MOVIES -----------");
+        movies.forEach(System.out::println);
+        System.out.println("--------------------------");
     }
 }

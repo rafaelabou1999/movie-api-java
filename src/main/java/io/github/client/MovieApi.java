@@ -6,13 +6,17 @@ import io.github.model.Movie;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 
 public class MovieApi {
-    public static Movie connectApi(String link) throws IOException, InterruptedException {
+    public static Movie connectApi(String data) throws IOException, InterruptedException {
+        String encondedLink = URLEncoder.encode(data, StandardCharsets.UTF_8);
+        String link = "http://www.omdbapi.com/?apikey=7a43f72&t=" + encondedLink;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

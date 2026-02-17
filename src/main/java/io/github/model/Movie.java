@@ -14,7 +14,7 @@ public class Movie {
     public Movie(MovieDTO dto) {
 
         this.title = dto.title();
-        this.year = Integer.parseInt(dto.year());
+        this.year = Integer.parseInt(dto.year().substring(0,4));
         try {
             this.rated = Double.parseDouble(dto.rated());
         } catch (Exception e) {
