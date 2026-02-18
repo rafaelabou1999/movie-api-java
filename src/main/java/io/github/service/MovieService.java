@@ -11,9 +11,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieService {
-    public List<Movie> favorites = new ArrayList<>();
-    public List<Movie> movies = new ArrayList<>();
+    private List<Movie> favorites = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
 
+    public List<Movie> getFavorites() {
+        return favorites;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setFavorites(List<Movie> favorites) {
+        this.favorites = favorites;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 
     public void chooseMovie(Movie movie) throws IOException, InterruptedException {
         movies.add(movie);
@@ -27,8 +42,6 @@ public class MovieService {
 
         if(favorites.contains(movie)){
             System.out.println("This movie has already been inserted");
-        } else {
-            favorites.add(movie);
         }
 
         if(titles.contains(movie.getTitle())){

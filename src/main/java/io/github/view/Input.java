@@ -37,7 +37,7 @@ public class Input {
             if (choice == 1) {
                 movie = validation.validateInput(sc, "Insert a movie:");
 
-                if(service.movies.contains(movie)){
+                if(service.getMovies().contains(movie)){
                     System.out.println("This move has already been added");
                 } else {
                     System.out.println("Movie successfully added");
@@ -52,7 +52,7 @@ public class Input {
 
 
             } else if (choice == 3){
-                if(!service.movies.isEmpty()){
+                if(!service.getMovies().isEmpty()){
                     service.showAllMovies();
                 } else{
                     System.out.println("No movie found.");
@@ -61,7 +61,7 @@ public class Input {
             } else if(choice == 4) {
                 movie = validation.validateInput(sc, "Enter a movie to save:");
                 String data = movie.getTitle();
-                boolean exists  = service.favorites.stream().anyMatch(m -> m.getTitle().equalsIgnoreCase(data));
+                boolean exists  = service.getFavorites().stream().anyMatch(m -> m.getTitle().equalsIgnoreCase(data));
                 if(exists){
                     System.out.println("Error. This movie is already in favorites");
                 } else {
