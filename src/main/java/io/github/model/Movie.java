@@ -11,6 +11,8 @@ public class Movie {
     private double imdbRating;
     private String genre;
 
+
+
     public Movie(MovieDTO dto) {
 
         this.title = dto.title();
@@ -26,7 +28,7 @@ public class Movie {
         } catch (Exception e) {
             this.imdbRating = 0.0;
         }
-        this.genre = dto.genre();
+        this.genre = dto.genre().split(",")[0].trim().toLowerCase();
     }
 
     public Movie(){

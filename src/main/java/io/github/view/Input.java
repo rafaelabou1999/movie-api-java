@@ -1,5 +1,6 @@
 package io.github.view;
 
+import io.github.model.Movie;
 import io.github.service.MovieService;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class Input {
                 continue; // 🔁 volta ao menu
             }
             sc.nextLine();
+
             if (choice == 1) {
                 movie = validation.validateInput(sc, "Insert a movie:");
 
@@ -43,13 +45,13 @@ public class Input {
                     System.out.println("Movie successfully added");
                     service.chooseMovie(movie);
                 }
+
             } else if (choice == 2){
                 System.out.println("-------- GENRES AVAILABLE ---------");
-                service.getGenre().forEach(g -> System.out.println("- " + g));
-
-                movie = validation.validateInput(sc, "Choose a genre:");
-                service.filterGenre(movie.getTitle());
-
+                service.getGenreFromMovies().forEach(g -> System.out.println("- " + g));
+                System.out.println("Choose a genre: ");
+                String genre = sc.nextLine();
+                service.filterGenre(genre);
 
             } else if (choice == 3){
                 if(!service.getMovies().isEmpty()){

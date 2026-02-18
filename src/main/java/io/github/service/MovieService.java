@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,14 +22,6 @@ public class MovieService {
 
     public List<Movie> getMovies() {
         return movies;
-    }
-
-    public void setFavorites(List<Movie> favorites) {
-        this.favorites = favorites;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
     }
 
     public void chooseMovie(Movie movie) throws IOException, InterruptedException {
@@ -55,22 +49,17 @@ public class MovieService {
         favorites.forEach(System.out::println);
     }
 
-    public List<String> getGenre(){
-
+    public List<String> getGenreFromMovies(){
         return movies.stream()
-                .map(m -> m.getGenre().toLowerCase().split(",")[0])
+                .map(Movie::getGenre)
                 .collect(Collectors.toList());
     }
 
 
-    public void filterGenre(String genre) throws IOException, InterruptedException {
-        genre = genre.toLowerCase();
-        var genreMovie = this.getGenre();
-        System.out.println("---------- GENRE " + genre.toUpperCase() + " -----------");
-        String finalGenre = genre;
-        movies.stream().filter(m -> m.getGenre().split(",")[0].trim().equalsIgnoreCase(finalGenre)).forEach(System.out::println);
+    public void filterGenre(String genreInput) throws IOException, InterruptedException {
+        List<String> allGenres = getGenreFromMovies();
+        movies.stream().filter(m -> m.getGenre().equalsIgnoreCase(genreInput)).forEach(System.out::println);
 
-        System.out.println("--------------------------");
     }
 
     public void showAllMovies(){
