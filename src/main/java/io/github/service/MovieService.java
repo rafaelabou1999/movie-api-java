@@ -25,25 +25,46 @@ public class MovieService {
     }
 
     public void chooseMovie(Movie movie) throws IOException, InterruptedException {
-        movies.add(movie);
+        boolean exists = false;
+        for(Movie m: movies){
+            if(m.getTitle().equalsIgnoreCase(movie.getTitle())){
+                exists = true;
+                break;
+            }
+        }
+
+        if(exists){
+            System.out.println("This movie has already been inserted!");
+        } else {
+            movies.add(movie);
+            System.out.println("Successfully added");
+        }
     }
 
     public void saveFavorite(String title) throws IOException, InterruptedException {
 
         Movie movie = MovieApi.connectApi(title);
 
-        List<String> titles = movies.stream().map(m -> m.getTitle()).collect(Collectors.toList());
+        List<Movie> titleFav = favorites.stream().filter(f -> f.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList());
+        boolean exists = false;
 
-        if(favorites.contains(movie)){
-            System.out.println("This movie has already been inserted");
+        for(Movie m: titleFav){
+            if(titleFav.contains(m)){
+                exists = true;
+                break;
+            }
         }
 
-        if(titles.contains(movie.getTitle())){
-            favorites.add(movie);
+        if(exists){
+            System.out.println("This movie has already been inserted!");
         } else {
-            System.out.println("This movie has not been inserted yet!");
+            favorites.add(movie);
+            System.out.println("Movie saved to favorites");
         }
+
+
     }
+
 
     public void showFavorites(){
         favorites.forEach(System.out::println);

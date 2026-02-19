@@ -38,14 +38,7 @@ public class Input {
 
             if (choice == 1) {
                 movie = validation.validateInput(sc, "Insert a movie:");
-
-                if(service.getMovies().contains(movie)){
-                    System.out.println("This move has already been added");
-                } else {
-                    System.out.println("Movie successfully added");
-                    service.chooseMovie(movie);
-                }
-
+                service.chooseMovie(movie);
             } else if (choice == 2){
                 System.out.println("-------- GENRES AVAILABLE ---------");
                 service.getGenreFromMovies().forEach(g -> System.out.println("- " + g));
