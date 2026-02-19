@@ -18,7 +18,6 @@ public class Input {
         System.out.println("---------------------------------");
 
         while(choice != 0){
-            System.out.println("Choose a option:");
             System.out.println("1 - Insert a movie");
             System.out.println("2 - Filter a genre ");
             System.out.println("3 - Show all movies");
