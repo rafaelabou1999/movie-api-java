@@ -20,11 +20,11 @@ public class Input {
         while(choice != 0){
             System.out.println("1 - Insert a movie");
             System.out.println("2 - Filter a genre ");
-            System.out.println("3 - Show all movies");
+            System.out.println("3 - Display all movies");
             System.out.println("4 - Save a movie to favorites");
-            System.out.println("5 - Print all movies saved as favorites");
+            System.out.println("5 - Display favorites");
 
-            System.out.println("Enter a option: ");
+            System.out.println("Enter an option: ");
             choice = sc.nextInt();
 
             if (!(choice >= 0 && choice <= 5)) {
