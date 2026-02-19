@@ -8,6 +8,8 @@ public record MovieDTO(
         @SerializedName("Year") String year,
         @SerializedName("Rated") String rated,
         @SerializedName("Awards") String awards,
-        @SerializedName("imdbRating") String imdbRating
+        @SerializedName("imdbRating") String imdbRating,
+        String Response,
+        String Error
 ) {
 }

@@ -38,6 +38,7 @@ public class Input {
 
             if (choice == 1) {
                 movie = validation.validateInput(sc, "Insert a movie:");
+
                 service.chooseMovie(movie);
             } else if (choice == 2){
                 System.out.println("-------- GENRES AVAILABLE ---------");

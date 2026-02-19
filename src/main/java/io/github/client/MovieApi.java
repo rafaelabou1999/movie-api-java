@@ -28,9 +28,12 @@ public class MovieApi {
 
         Gson gson = new Gson();
         MovieDTO dto = gson.fromJson(json, MovieDTO.class);
-        Movie movie = new Movie(dto);
+        if(dto == null || "False".equalsIgnoreCase(dto.Response())){
+            System.out.println("Movie not found");
+            return null;
+        }
 
-        return movie;
+        return new Movie(dto);
 
     }
 
