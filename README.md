@@ -9,10 +9,10 @@ Enter a movie to start the program:
 ```
 1 - Insert a movie
 2 - Filter a genre 
-3 - Show all movies
+3 - Display all movies
 4 - Save a movie to favorites
-5 - Print all movies saved as favorites
-Enter a option: 
+5 - Display favorites
+Enter an option: 
 ```
 
 ---
