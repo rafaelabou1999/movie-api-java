@@ -1,12 +1,19 @@
 # MovieLife (movie-api-java)
 
 A **Java CLI (terminal)** application that consumes the **OMDb (IMDb) API** to search movies and series and manage:
+```
+----- Welcome to MovieLife -----
+Enter a movie to start the program:
+```
 
-- added movies
-- genre filtering
-- favorites list
-
-Repository: `movie-api-java` — Consuming IMDb API in Java.
+```
+1 - Insert a movie
+2 - Filter a genre 
+3 - Show all movies
+4 - Save a movie to favorites
+5 - Print all movies saved as favorites
+Enter a option: 
+```
 
 ---
 
