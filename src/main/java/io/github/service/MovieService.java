@@ -45,15 +45,7 @@ public class MovieService {
 
         Movie movie = MovieApi.connectApi(title);
 
-        List<Movie> titleFav = favorites.stream().filter(f -> f.getTitle().equalsIgnoreCase(title)).collect(Collectors.toList());
-        boolean exists = false;
-
-        for(Movie m: titleFav){
-            if(titleFav.contains(m)){
-                exists = true;
-                break;
-            }
-        }
+        boolean exists = favorites.stream().anyMatch(f -> f.getTitle().equalsIgnoreCase(title));
 
         if(exists){
             System.out.println("This movie has already been inserted!");
